@@ -7,15 +7,22 @@
 </head>
 <body>
 
-  <div class="max-width">
-    <button class="bg-green">Iniciar</button>
-    <button class="bg-yellow">Pausar</button>
-    <button class="bg-red">Parar</button>
-    <h1 id="counter">00:00:00</h1>
+  <div class="myTime">
+
+    <div class="myTime__display">
+      <span id="counter">00:00:00</span>
+      <input type="text" placeholder="O que estou fazendo?">
+    </div>
+
+    <div class="myTime__actions">
+      <button class="myTime__actions--start">Iniciar</button>
+      <button class="myTime__actions--stop">Parar</button>
+    </div>
+
+    <div class="myTime__times">
+      <ul class="ulElement"></ul>
+    </div>
   </div>
-
-  <ul class="ulElement"></ul>
-
 <script src="./bundle.js"></script>
 </body>
 </html>

@@ -12,13 +12,9 @@ function start() {
   cron = setInterval(() => { timer(); }, 1000);
 }
 
-document.querySelector('.bg-green').addEventListener('click', function(){
+document.querySelector('.myTime__actions--start').addEventListener('click', function(){
   start();
 })
-
-function pause() {
-  clearInterval(cron);
-}
 
 function stop() {
 
@@ -27,7 +23,12 @@ function stop() {
   hh = 0;
   mm = 0;
   ss = 0;
+
 }
+
+document.querySelector('.myTime__actions--stop').addEventListener('click', function(){
+  stop();
+})
 
 function timer() {
     ss++;
@@ -51,12 +52,12 @@ function timer() {
     return format;
 }
 
-document.querySelector('.bg-red').addEventListener('click', function() {
+document.querySelector('.myTime__actions--stop').addEventListener('click', function() {
 
   const valor = document.getElementById('counter');
 
   const elementList = document.createElement('li');
-  elementList.classList.add('ulElement__item');
+  elementList.classList.add('myTime__times-item');
 
   let ulElement = document.querySelector('.ulElement');
 
