@@ -1,6 +1,21 @@
 import './app.scss';
+import "babel-polyfill";
 
-const times = [];
+async function getTimes() {
+  try{
+    const response = await fetch('http://localhost:3000/times/')
+
+    const data = await response.json()
+
+    console.log(data)
+
+  } catch (error) {
+
+    console.log(error);
+  }
+}
+
+getTimes();
 
 let hh = 0;
 let mm = 0;
