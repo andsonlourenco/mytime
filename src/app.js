@@ -1,5 +1,6 @@
 import './app.scss';
 
+const times = [];
 
 let hh = 0;
 let mm = 0;
@@ -26,10 +27,6 @@ function stop() {
 
 }
 
-document.querySelector('.myTime__actions--stop').addEventListener('click', function(){
-  stop();
-})
-
 function timer() {
     ss++;
 
@@ -53,6 +50,7 @@ function timer() {
 }
 
 document.querySelector('.myTime__actions--stop').addEventListener('click', function() {
+  stop();
 
   const valor = document.getElementById('counter');
 
@@ -67,4 +65,4 @@ document.querySelector('.myTime__actions--stop').addEventListener('click', funct
 
   document.getElementById('counter').innerText = '00:00:00';
 
-})
+});
