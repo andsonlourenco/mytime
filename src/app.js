@@ -7,7 +7,7 @@ async function getTimes() {
 
     const data = await response.json()
 
-    console.log(data)
+    // showTimes(data)
 
   } catch (error) {
 
@@ -16,6 +16,34 @@ async function getTimes() {
 }
 
 getTimes();
+
+function showTimes(times){
+
+  let outputTimes = '';
+
+  for(let time of times){
+    outputTimes += `<li class="myTime__times-item">${time.time} <span>${time.description}</span><li>`
+  }
+
+  document.querySelector('.ulElement').innerHTML = outputTimes;
+}
+
+showTimes([    {
+  "id": 1,
+  "time": "05:10:50",
+  "description": null
+},
+{
+  "id": 6,
+  "time": "05:10:50",
+  "description": "Descrição da task Descrição da task"
+},
+{
+  "id": 7,
+  "time": "05:10:50",
+  "description": "Descrição da task Descrição da task"
+}])
+
 
 let hh = 0;
 let mm = 0;
