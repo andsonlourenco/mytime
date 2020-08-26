@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
-    "server": "node src/api/server.js"
+    "server": "json-server --watch src/api/db.json --port 3005"
   },
   "author": "andson <andson-lourenco@hotmail.com>",
   "devDependencies": {

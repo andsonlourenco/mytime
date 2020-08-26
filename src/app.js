@@ -3,11 +3,11 @@ import "babel-polyfill";
 
 async function getTimes() {
   try{
-    const response = await fetch('http://localhost:3000/times/')
+    const response = await fetch('http://localhost:3005/times')
 
     const data = await response.json()
 
-    // showTimes(data)
+    showTimes(data)
 
   } catch (error) {
 
@@ -28,21 +28,21 @@ function showTimes(times){
   document.querySelector('.ulElement').innerHTML = outputTimes;
 }
 
-showTimes([    {
-  "id": 1,
-  "time": "05:10:50",
-  "description": null
-},
-{
-  "id": 6,
-  "time": "05:10:50",
-  "description": "Descrição da task Descrição da task"
-},
-{
-  "id": 7,
-  "time": "05:10:50",
-  "description": "Descrição da task Descrição da task"
-}])
+// showTimes([    {
+//   "id": 1,
+//   "time": "05:10:50",
+//   "description": null
+// },
+// {
+//   "id": 6,
+//   "time": "05:10:50",
+//   "description": "Descrição da task Descrição da task"
+// },
+// {
+//   "id": 7,
+//   "time": "05:10:50",
+//   "description": "Descrição da task Descrição da task"
+// }])
 
 
 let hh = 0;
