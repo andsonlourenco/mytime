@@ -1,5 +1,5 @@
 import './app.scss';
-import "babel-polyfill";
+import "@babel/polyfill";
 
 async function getTimes() {
   try{
