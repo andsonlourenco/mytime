@@ -1,9 +1,12 @@
 import './app.scss';
 import "@babel/polyfill";
+import { v4 as uuidv4} from 'uuid';
+
+const baseUrl = 'http://localhost:3005/times';
 
 async function getTimes() {
   try{
-    const response = await fetch('http://localhost:3005/times')
+    const response = await fetch(baseUrl)
 
     const data = await response.json()
 
@@ -13,6 +16,19 @@ async function getTimes() {
 
     console.log(error);
   }
+}
+
+async function saveTime(dataTime) {
+  fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataTime),
+  })
+  .then(response => response.json())
+  .catch(error => console.error('Error:', error))
+  .then(response =>  JSON.stringify(response));
 }
 
 getTimes();
@@ -27,22 +43,6 @@ function showTimes(times){
 
   document.querySelector('.ulElement').innerHTML = outputTimes;
 }
-
-// showTimes([    {
-//   "id": 1,
-//   "time": "05:10:50",
-//   "description": null
-// },
-// {
-//   "id": 6,
-//   "time": "05:10:50",
-//   "description": "Descrição da task Descrição da task"
-// },
-// {
-//   "id": 7,
-//   "time": "05:10:50",
-//   "description": "Descrição da task Descrição da task"
-// }])
 
 
 let hh = 0;
@@ -87,7 +87,7 @@ function timer() {
     let format = (hh < 10 ? '0' + hh : hh) + ':' + (mm < 10 ? '0' + mm : mm) + ':' + (ss < 10 ? '0' + ss : ss);
 
 
-    document.getElementById('counter').innerText = format;
+    document.querySelector('.myTime__time').innerText = format;
 
     return format;
 }
@@ -95,17 +95,29 @@ function timer() {
 document.querySelector('.myTime__actions--stop').addEventListener('click', function() {
   stop();
 
-  const valor = document.getElementById('counter');
+  const valor = document.querySelector('.myTime__time').outerText;
+  const taskDescription = document.querySelector('.myTime__task').value;
 
   const elementList = document.createElement('li');
   elementList.classList.add('myTime__times-item');
 
+  elementList.innerText = valor;
+
+  const elspan = document.createElement('span');
+  elspan.innerText = taskDescription;
+
+  elementList.appendChild(elspan);
+
   let ulElement = document.querySelector('.ulElement');
 
-  ulElement.appendChild(elementList)
+  ulElement.appendChild(elementList);
 
-  elementList.textContent = valor.innerHTML;
+  document.querySelector('.myTime__time').innerText = '00:00:00';
+  document.querySelector('.myTime__task').innerText = '';
 
-  document.getElementById('counter').innerText = '00:00:00';
+
+  const dataTime = {id: uuidv4(), time: valor, description: taskDescription};
+  
+  saveTime(dataTime);
 
 });
