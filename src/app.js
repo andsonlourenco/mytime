@@ -3,11 +3,13 @@ import "@babel/polyfill";
 import { v4 as uuidv4 } from "uuid";
 
 const baseUrl = "http://localhost:3005/times";
+
 let hh = 0;
 let mm = 0;
 let ss = 0;
-
 let cron;
+
+getTimes();
 
 async function getTimes() {
   try {
@@ -45,10 +47,13 @@ async function deleteTime(timeId) {
     .catch((err) => console.error(err));
 }
 
-getTimes();
-
 function renderTime(id, time, description) {
-  return `<li class="myTime__times-item" data-id="${id}">${time} <span>${description}</span> <button class="removeItem">x</button> <li>`;
+  return `
+    <li class="myTime__times-item" data-id="${id}">
+      ${time}
+      <span>${description}</span>
+      <button class="removeItem">x</button>
+    <li>`;
 }
 
 function showTimes(times) {
@@ -58,7 +63,7 @@ function showTimes(times) {
     outputTimes += renderTime(time.id, time.time, time.description);
   }
 
-  document.querySelector(".ulElement").innerHTML = outputTimes;
+  document.querySelector(".timeList").innerHTML = outputTimes;
 
   let itemsRemove = document.querySelectorAll(".removeItem");
 
@@ -75,7 +80,6 @@ function start() {
     timer();
   }, 1000);
 }
-
 document
   .querySelector(".myTime__actions--start")
   .addEventListener("click", function () {
@@ -124,11 +128,10 @@ document
     const taskDescription = document.querySelector(".myTime__task").value;
     const idTime = uuidv4();
 
-    let ulElement = document.querySelector(".ulElement");
+    const timeList = document.querySelector(".timeList");
+    const printTime = renderTime(idTime, valueTime, taskDescription);
 
-    let printTime = renderTime(idTime, valueTime, taskDescription);
-
-    ulElement.innerHTML += printTime;
+    timeList.innerHTML += printTime;
 
     document.querySelector(".myTime__time").innerText = "00:00:00";
     document.querySelector(".myTime__task").innerText = "";
