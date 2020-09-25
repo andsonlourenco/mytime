@@ -47,11 +47,15 @@ async function deleteTime(timeId) {
 
 getTimes();
 
+function renderTime(id, time, description) {
+  return `<li class="myTime__times-item" data-id="${id}">${time} <span>${description}</span> <button class="removeItem">x</button> <li>`;
+}
+
 function showTimes(times) {
   let outputTimes = "";
 
   for (let time of times) {
-    outputTimes += `<li class="myTime__times-item" data-id="${time.id}">${time.time} <span>${time.description}</span> <button class="removeItem">x</button> <li>`;
+    outputTimes += renderTime(time.id, time.time, time.description);
   }
 
   document.querySelector(".ulElement").innerHTML = outputTimes;
@@ -116,26 +120,22 @@ document
   .addEventListener("click", function () {
     stop();
 
-    const valor = document.querySelector(".myTime__time").outerText;
+    const valueTime = document.querySelector(".myTime__time").outerText;
     const taskDescription = document.querySelector(".myTime__task").value;
-
-    const elementList = document.createElement("li");
-    elementList.classList.add("myTime__times-item");
-    elementList.innerText = valor;
-
-    const elspan = document.createElement("span");
-    elspan.innerText = taskDescription;
-    elementList.appendChild(elspan);
+    const idTime = uuidv4();
 
     let ulElement = document.querySelector(".ulElement");
-    ulElement.appendChild(elementList);
+
+    let printTime = renderTime(idTime, valueTime, taskDescription);
+
+    ulElement.innerHTML += printTime;
 
     document.querySelector(".myTime__time").innerText = "00:00:00";
     document.querySelector(".myTime__task").innerText = "";
 
     const dataTime = {
-      id: uuidv4(),
-      time: valor,
+      id: idTime,
+      time: valueTime,
       description: taskDescription,
     };
 
